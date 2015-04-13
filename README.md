@@ -8,10 +8,3 @@ I limited myself to the time I had on a flight to Florida for this project. I'll
 ## License:
 
 MIT
-
-## Contact:
-
-*Steve Gargolinski
-*steve.gargolinski@gmail.com
-*[@sgargolinski](http://twitter.com/sgargolinski)
-*[http://www.stevegargolinski.com](http://www.stevegargolinski.com)
