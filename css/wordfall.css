@@ -1,0 +1,26 @@
+html, body {
+    cursor: default;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    width: 100%;
+    background: -webkit-linear-gradient(top, #C2C2D6, #FFFFFF);
+}
+
+.word {
+    border: 1px solid black;
+    font-size: 20px;
+    position: absolute;
+}
+
+.activeWord {
+    border: 2px solid red;
+}
+
+.lettersMatched {
+    color: red;
+}
+
+.lettersNotMached {
+    color: black;
+}
