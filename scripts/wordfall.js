@@ -65,26 +65,27 @@ $(document).ready(function() {
 
     // How many points is this word worth?
     function scoreWord(word) {
-        return $(word).children()[0].innerHTML.length + $(word).children()[1].innerHTML.length;
+        return $($(word).children()[0]).html().length + $($(word).children()[1]).html().length;
     }
 
     // Get the unmatched section of this word.
     function getUnmatched(word) {
-        return $(word).children()[1].innerHTML;
+        return $($(word).children()[1]).html();
     }
 
     // Move one letter from the unmatched span to the matched span.
     // Brings along a space if there's an appropriate one.
     function moveUnmatchedToMatched(word) {
-        var unmatchedString = $(word).children()[1].innerHTML;
+        var matched = $($(word).children()[0]);
+        var unmatched = $($(word).children()[1]);
 
-        $(word).children()[0].innerHTML += unmatchedString[0];
-        $(word).children()[1].innerHTML = unmatchedString.slice(1, unmatchedString.length);
+        matched.html(matched.html() + unmatched.html()[0]);
+        unmatched.html(unmatched.html().slice(1, unmatched.html().length));
 
         // If there's a space then we're going to move that over also.
-        if (unmatchedString.length >= 2 && unmatchedString[1] === ' ') {
-            $(word).children()[0].innerHTML += ' ';
-            $(word).children()[1].innerHTML = unmatchedString.slice(2, unmatchedString.length);
+        if (unmatched.html().length >= 2 && unmatched.html()[0] === ' ') {
+            matched.html(matched.html() + ' ');
+            unmatched.html(unmatched.html().slice(1, unmatched.html().length));
         }
     }
 
@@ -138,10 +139,12 @@ $(document).ready(function() {
     $(document).keyup(function(event) {
         // Escape will cancel the current word. keyup() because ESC doesn't work with keypress() in Chrome?
         if (activeWord !== null && event.keyCode === 27) {
-            console.log('Escaping');
+            var matched = $(activeWord).children()[0];
+            var unmatched = $(activeWord).children()[1];
+
             $(activeWord).removeClass('activeWord');
-            $(activeWord).children()[1].innerHTML = $(activeWord).children()[0].innerHTML + $(activeWord).children()[1].innerHTML;
-            $(activeWord).children()[0].innerHTML = '';
+            $(unmatched).html($(matched).html() + $(unmatched).html());
+            $(matched).html('');
             activeWord = null;
         } /*else if (event.keyCode === 32) {
             // Super secret cheat code.

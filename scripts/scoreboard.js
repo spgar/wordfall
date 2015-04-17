@@ -36,7 +36,7 @@ var Scoreboard = function(scoreDiv, levelDiv, healthDiv, callbackGameOver) {
         if (score > maxScore) {
             maxScore = score;
         }
-        divScore.innerHTML = 'Score: ' + score + ' (max: ' + maxScore + ')';
+        $(divScore).html('Score: ' + score + ' (max: ' + maxScore + ')');
     };
 
     // Health
@@ -46,7 +46,7 @@ var Scoreboard = function(scoreDiv, levelDiv, healthDiv, callbackGameOver) {
 
     var setHealth = function(value) {
         health = value;
-        divHealth.innerHTML = 'Health: ' + health;
+        $(divHealth).html('Health: ' + health);
 
         if (health <= 0) {
             callbackGameOver();
@@ -56,14 +56,14 @@ var Scoreboard = function(scoreDiv, levelDiv, healthDiv, callbackGameOver) {
     // Level
     var setLevel = function(value) {
         level = value;
-        divLevel.innerHTML = 'Level: ' + level;
+        $(divLevel).html('Level: ' + level);
     };
 
     var incrementWordsFinished = function() {
         wordsFinishedThisLevel += 1;
         if (wordsFinishedThisLevel > WORDSFINISHED_PER_LEVEL) {
             setHealth(health + HEALTH_GAINED_PER_LEVEL);
-            level += 1;
+            setLevel(level + 1);
             wordsFinishedThisLevel = 0;
         }
     };
@@ -104,8 +104,6 @@ var Scoreboard = function(scoreDiv, levelDiv, healthDiv, callbackGameOver) {
 
         getHealth: getHealth,
         setHealth: setHealth,
-
-        setLevel: setLevel,
 
         calcCurrentWordDifficulty: calcCurrentWordDifficulty,
         calcWordDelay: calcWordDelay,
